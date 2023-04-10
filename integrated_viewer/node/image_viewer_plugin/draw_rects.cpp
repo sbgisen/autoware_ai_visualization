@@ -7,7 +7,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "draw_rects.h"
 
-#if (CV_MAJOR_VERSION == 3)
+#if (CV_MAJOR_VERSION >= 3)
 
 #include "gencolors.cpp"
 
@@ -24,7 +24,7 @@ namespace integrated_viewer
     DrawRects::DrawRects(void)
     {
         // Generate color map to represent tracked object
-#if (CV_MAJOR_VERSION == 3)
+#if (CV_MAJOR_VERSION >= 3)
         generateColors(color_map_, 10);
 #else
         cv::generateColors(color_map_, 10);
@@ -113,7 +113,7 @@ namespace integrated_viewer
                                         y2),
                               color_map_[0],
                               kRectangleThickness,
-                              CV_AA,
+                              cv::LINE_AA,
                               0);
             }
         }
@@ -138,7 +138,7 @@ namespace integrated_viewer
                                     detected_object.y + detected_object.height),
                           color_map_[0],
                           kRectangleThickness,
-                          CV_AA,
+                          cv::LINE_AA,
                           0);
         }
     } // DrawRects::DrawImageRect()
@@ -222,7 +222,7 @@ namespace integrated_viewer
                     font_scale,
                     CV_RGB(255, 255, 255),
                     1,
-                    CV_AA);
+                    cv::LINE_AA);
         label_origin.y+= text_holder_rect.height / 3;
         cv::putText(image,
                     label_two.str(),
@@ -231,7 +231,7 @@ namespace integrated_viewer
                     font_scale,
                     CV_RGB(255, 255, 255),
                     1,
-                    CV_AA);
+                    cv::LINE_AA);
 
     } // DrawRects::DrawLabel()
 } // end namespace integrated_viewer
